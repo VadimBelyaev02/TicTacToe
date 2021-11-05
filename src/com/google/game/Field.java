@@ -38,6 +38,7 @@ public class Field {
     public void addSymbol(Move move) throws ThePointIsBusyException, PointIsOutOfGameBoundsException {
         checkMove(move);
         field[move.getX()][move.getY()] = move.getTypeOfFigure().getSymbol();
+        countOfEmptyCells--;
     }
 
     public void checkMove(Move move) throws PointIsOutOfGameBoundsException, ThePointIsBusyException{
