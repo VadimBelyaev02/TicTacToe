@@ -6,11 +6,12 @@ import com.google.exception.ThePointIsBusyException;
 public class Field {
 
     private final Character[][] field;
-    private final Integer fieldSize = 3;
+    private final Integer fieldSize;
     private Integer countOfEmptyCells;
-    private final Character EMPTY = ' ';
+    private static final Character EMPTY = ' ';
 
     public Field() {
+        this.fieldSize = 3;
         this.countOfEmptyCells = 9;
         field = new Character[fieldSize][fieldSize];
         for (int i = 0; i < fieldSize; i++) {

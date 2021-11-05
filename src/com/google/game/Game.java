@@ -23,7 +23,6 @@ public class Game {
     public void init() {
         Scanner scanner = new Scanner(System.in);
         boolean isCorrect;
-        isCorrect = true;
         Figure firstFigure = Figure.CROSS;
         Figure secondFigure = Figure.ZERO;
 
@@ -33,7 +32,7 @@ public class Game {
         String secondName = scanner.next();
 
         do {
-
+            isCorrect = true;
             System.out.println("Would you like to play with a real player or with a machine?");
             System.out.println("1 - alive");
             System.out.println("2 - machine");
@@ -71,6 +70,11 @@ public class Game {
     }
 
     public boolean hasWinner() {
+        if (field.getCountOfEmptyCells() == 0) {
+            System.out.println("Draw");
+            return true;
+        }
+
         char winSymbol = ' ';
         for (int i = 0; i < field.getFieldSize(); i++) {
             if (field.getCell(0, i) == field.getCell(1, i) && field.getCell(0, i) == field.getCell(2, i)) {
@@ -98,11 +102,6 @@ public class Game {
 
         if (winSymbol == secondPlayer.getTypeOfFigure().getSymbol()){
             System.out.println(secondPlayer.getName() + " is winner!");
-            return true;
-        }
-
-        if (field.getCountOfEmptyCells() == 0) {
-            System.out.println("Draw");
             return true;
         }
         return false;

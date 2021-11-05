@@ -34,7 +34,6 @@ public class Machine implements Player {
         } while (!isCorrect);
 
         field.show();
-        field.setCountOfEmptyCells(field.getCountOfEmptyCells() + 1);
     }
 
     @Override
