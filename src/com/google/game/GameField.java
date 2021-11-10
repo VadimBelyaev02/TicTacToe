@@ -1,18 +1,16 @@
 package com.google.game;
 
-import com.google.exception.PointIsOutOfGameBoundsException;
-import com.google.exception.ThePointIsBusyException;
 
-public class Field {
+public class GameField {
 
     private final Character[][] field;
     private final Integer fieldSize;
     private Integer countOfEmptyCells;
     private static final Character EMPTY = ' ';
 
-    public Field() {
-        this.fieldSize = 3;
-        this.countOfEmptyCells = 9;
+    public GameField(Integer fieldSize) {
+        this.fieldSize = fieldSize;
+        this.countOfEmptyCells = fieldSize * fieldSize;
         field = new Character[fieldSize][fieldSize];
         for (int i = 0; i < fieldSize; i++) {
             for (int j = 0; j < fieldSize; j++) {
@@ -25,7 +23,6 @@ public class Field {
     public void show() {
         System.out.println();
         for (int i = 0; i < fieldSize; i++) {
-
             for (int j = 0; j < fieldSize; j++) {
                 System.out.print("|");
                 System.out.print(field[i][j]);
@@ -36,19 +33,16 @@ public class Field {
         System.out.println();
     }
 
-    public void addSymbol(Move move) throws ThePointIsBusyException, PointIsOutOfGameBoundsException {
-        checkMove(move);
+    public void addSymbol(Move move) {
         field[move.getX()][move.getY()] = move.getTypeOfFigure().getSymbol();
         countOfEmptyCells--;
     }
 
-    public void checkMove(Move move) throws PointIsOutOfGameBoundsException, ThePointIsBusyException{
-        if (move.getY() > fieldSize || move.getX() > fieldSize) {
-            throw new PointIsOutOfGameBoundsException();
+    public boolean isCoordsCorrect(Move move) {
+        if (move.getY() > fieldSize || move.getX() > fieldSize || move.getX() < 0 || move.getY() < 0) {
+            return false;
         }
-        if (field[move.getX()][move.getY()] != EMPTY) {
-            throw new ThePointIsBusyException();
-        }
+        return field[move.getX()][move.getY()] == EMPTY;
     }
 
     public Integer getCountOfEmptyCells() {

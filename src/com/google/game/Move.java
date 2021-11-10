@@ -1,14 +1,13 @@
 package com.google.game;
 
+
 public class Move {
     private int x;
     private int y;
-    private Figure figureOfFigure;
+    private Figure typeOfFigure;
 
-    public Move(int x, int y, Figure figureOfFigure) {
-        this.x = x;
-        this.y = y;
-        this.figureOfFigure = figureOfFigure;
+    public Move(Figure typeOfFigure) {
+        this.typeOfFigure = typeOfFigure;
     }
 
     public void setX(int x) {
@@ -28,10 +27,10 @@ public class Move {
     }
 
     public void setTypeOfFigure(Figure figureOfFigure) {
-        this.figureOfFigure = figureOfFigure;
+        this.typeOfFigure = figureOfFigure;
     }
 
     public Figure getTypeOfFigure() {
-        return figureOfFigure;
+        return typeOfFigure;
     }
 }

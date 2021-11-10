@@ -1,8 +1,6 @@
 package com.google.player;
 
-import com.google.exception.PointIsOutOfGameBoundsException;
-import com.google.exception.ThePointIsBusyException;
-import com.google.game.Field;
+import com.google.game.GameField;
 import com.google.game.Figure;
 import com.google.game.Move;
 
@@ -12,27 +10,20 @@ public class Machine implements Player {
 
     private final Figure typeOfFigure;
     private String name;
+    private Move move;
 
     public Machine(String name, Figure typeOfFigure) {
         this.name = name;
         this.typeOfFigure = typeOfFigure;
+        this.move = new Move(typeOfFigure);
     }
 
     @Override
-    public void makeMove(Field field) {
+    public void makeMove(GameField field) {
         Random random = new Random();
-        boolean isCorrect;
-        do {
-            isCorrect = true;
-            int x = random.nextInt(field.getFieldSize());
-            int y = random.nextInt(field.getFieldSize());
-            try {
-                field.addSymbol(new Move(x, y, typeOfFigure));
-            } catch (PointIsOutOfGameBoundsException | ThePointIsBusyException ex) {
-                isCorrect = false;
-            }
-        } while (!isCorrect);
-
+        move.setX(random.nextInt(field.getFieldSize()));
+        move.setY(random.nextInt(field.getFieldSize()));
+        field.addSymbol(move);
         field.show();
     }
 
