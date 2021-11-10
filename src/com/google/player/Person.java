@@ -32,16 +32,14 @@ public class Person implements Player {
                 if (!field.isCoordsCorrect(move)) {
                     System.out.println("Incorrect!");
                     isCorrect = false;
-                    continue;
                 }
-                field.addSymbol(move);
             } catch (InputMismatchException ex) {
                 System.out.println("Incorrect input, try again");
                 scanner.next();
                 isCorrect = false;
             }
         } while (!isCorrect);
-
+        field.addSymbol(move);
         field.show();
     }
 

@@ -9,8 +9,8 @@ import java.util.Random;
 public class Machine implements Player {
 
     private final Figure typeOfFigure;
-    private String name;
-    private Move move;
+    private final String name;
+    private final Move move;
 
     public Machine(String name, Figure typeOfFigure) {
         this.name = name;
@@ -21,8 +21,16 @@ public class Machine implements Player {
     @Override
     public void makeMove(GameField field) {
         Random random = new Random();
-        move.setX(random.nextInt(field.getFieldSize()));
-        move.setY(random.nextInt(field.getFieldSize()));
+        boolean isCorrect;
+        do {
+            isCorrect = true;
+            move.setX(random.nextInt(field.getFieldSize()));
+            move.setY(random.nextInt(field.getFieldSize()));
+            if (!field.isCoordsCorrect(move)) {
+                System.out.println("Incorrect!");
+                isCorrect = false;
+            }
+        } while (!isCorrect);
         field.addSymbol(move);
         field.show();
     }

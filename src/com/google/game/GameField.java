@@ -6,7 +6,7 @@ public class GameField {
     private final Character[][] field;
     private final Integer fieldSize;
     private Integer countOfEmptyCells;
-    private static final Character EMPTY = ' ';
+    private static final char EMPTY = ' ';
 
     public GameField(Integer fieldSize) {
         this.fieldSize = fieldSize;
@@ -49,13 +49,11 @@ public class GameField {
         return countOfEmptyCells;
     }
 
-    public void setCountOfEmptyCells(Integer count) {
-        this.countOfEmptyCells = count;
-    }
-
     public Integer getFieldSize() {
         return fieldSize;
     }
+
+    public char getEmpty() { return EMPTY; }
 
     public char getCell(int i, int j) {
         return field[i][j];

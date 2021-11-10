@@ -32,24 +32,45 @@ public class Game {
     }
 
     private boolean checkDiagonals() {
+        boolean flag = true;
+        int fieldSize = field.getFieldSize();
         for (int i = 0; i < field.getFieldSize(); i++) {
-
+            if (field.getCell(0, 0) == field.getEmpty() || field.getCell(i, i) != field.getCell(0, 0)) {
+                flag = false;
+            } else {
+                continue;
+            }
+            if (field.getCell(i, fieldSize - i - 1) == field.getEmpty()
+                    || field.getCell(i, fieldSize - i - 1) != field.getCell(0, fieldSize - 1)) {
+                break;
+            } else {
+                flag = true;
+            }
         }
+        if (flag) {
+            if (field.getCell(0, 0) == field.getCell(1, 1)) {
+                System.out.println(getPlayerBySymbol(field.getCell(0, 0)) + " is winner!");
+            } else {
+                System.out.println(getPlayerBySymbol(field.getCell(0, field.getFieldSize() - 1)) + " is winner!");
+            }
+            return true;
+        }
+        return false;
     }
 
     private boolean checkLines() {
         for (int i = 0; i < field.getFieldSize(); i++) {
-            int j;
             boolean flag = true;
-            for (j = 0; j < field.getFieldSize(); j++) {
-                if (field.getCell(i, 0) == ' ' || field.getCell(i, 0) != field.getCell(i, j)) {
+            for (int j = 0; j < field.getFieldSize(); j++) {
+                if (field.getCell(0, i) == field.getEmpty() || field.getCell(0, i) != field.getCell(j, i)) {
                     flag = false;
                 } else {
                     continue;
                 }
-                if (field.getCell(0, i) != ' ' && field.getCell(0, i) == field.getCell(j, i)) {
-                    flag = false;
+                if (field.getCell(i, 0) == field.getEmpty() || field.getCell(i, 0) != field.getCell(i, j)) {
                     break;
+                } else {
+                    flag = true;
                 }
 
             }
@@ -70,6 +91,7 @@ public class Game {
             System.out.println("Draw");
             return true;
         }
+        return false;
     }
 
     private String getPlayerBySymbol(char symbol) {
