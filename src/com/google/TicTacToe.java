@@ -16,38 +16,50 @@ public class TicTacToe {
         Scanner scanner = new Scanner(System.in);
         boolean isCorrect;
         Player secondPlayer;
-        int yourOpponent = 0;
-        GameField field;
+        int opponent = 0;
+        int fieldSize = 0;
+
         System.out.print("Enter the first player's name: ");
         String firstName = scanner.nextLine();
-        System.out.print("Enter the second player's name: ");
-        String secondName = scanner.nextLine();
+        String secondName = null;
 
-        Player firstPlayer = new Person(firstName, Figure.CROSS);
 
         do {
-            isCorrect = true;
-            System.out.println("Would you like to play with a real player or with a machine?");
-            System.out.println("1 - alive");
-            System.out.println("2 - machine");
-
             try {
-                yourOpponent = scanner.nextInt();
+                isCorrect = true;
+                System.out.print("Enter the second player's name: ");
+                secondName = scanner.nextLine();
+                if (firstName.equals(secondName)) {
+                    isCorrect = false;
+                    continue;
+                }
+                System.out.println("Would you like to play with a real player or with a machine?");
+                System.out.println("1 - alive");
+                System.out.println("2 - machine");
+
+                opponent = scanner.nextInt();
+
+                System.out.print("Enter the field's size: ");
+                fieldSize = scanner.nextInt();
+
+                if (opponent < 1 || opponent > 2 || fieldSize < 3) {
+                    isCorrect = false;
+                }
             } catch (InputMismatchException exception) {
                 isCorrect = false;
                 scanner.next();
             }
         } while (!isCorrect);
 
-        secondPlayer = switch (yourOpponent) {
-            case 1 -> new Person(secondName, Figure.ZERO);
-            case 2 -> new Machine(secondName, Figure.ZERO);
-            default -> {
-                isCorrect = false;
-                yield new Person(secondName, Figure.CROSS);
-            }
-        };
-        Game game = new Game(firstPlayer, secondPlayer, 3);
+        if (opponent == 1) {
+            secondPlayer = new Person(secondName, Figure.ZERO);
+        } else {
+            secondPlayer = new Machine(secondName, Figure.ZERO);
+        }
+
+        Player firstPlayer = new Person(firstName, Figure.CROSS);
+
+        Game game = new Game(firstPlayer, secondPlayer, fieldSize);
         game.playing();
     }
 }

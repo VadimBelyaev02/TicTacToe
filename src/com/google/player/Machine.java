@@ -18,6 +18,23 @@ public class Machine implements Player {
         this.move = new Move(typeOfFigure);
     }
 
+//    @Override
+//    public void makeMove(GameField field) {
+//        Random random = new Random();
+//        boolean isCorrect;
+//        do {
+//            isCorrect = true;
+//            move.setX(random.nextInt(field.getFieldSize()));
+//            move.setY(random.nextInt(field.getFieldSize()));
+//            if (!field.isCoordsCorrect(move)) {
+//                System.out.println("Incorrect!");
+//                isCorrect = false;
+//            }
+//        } while (!isCorrect);
+//        field.addSymbol(move);
+//        field.show();
+//    }
+
     @Override
     public void makeMove(GameField field) {
         Random random = new Random();

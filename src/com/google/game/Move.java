@@ -1,7 +1,7 @@
 package com.google.game;
 
-
 public class Move {
+
     private int x;
     private int y;
     private Figure typeOfFigure;

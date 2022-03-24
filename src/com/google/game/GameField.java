@@ -6,7 +6,7 @@ public class GameField {
     private final Character[][] field;
     private final Integer fieldSize;
     private Integer countOfEmptyCells;
-    private static final char EMPTY = ' ';
+    private final char EMPTY = ' ';
 
     public GameField(Integer fieldSize) {
         this.fieldSize = fieldSize;
@@ -21,8 +21,14 @@ public class GameField {
 
 
     public void show() {
+        System.out.print("\n |");
+        for (int i = 0; i < fieldSize; i++) {
+            int j = i + 1;
+            System.out.print(j + "|");
+        }
         System.out.println();
         for (int i = 0; i < fieldSize; i++) {
+            System.out.print(i + 1);
             for (int j = 0; j < fieldSize; j++) {
                 System.out.print("|");
                 System.out.print(field[i][j]);
